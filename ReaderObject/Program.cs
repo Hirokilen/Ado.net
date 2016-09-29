@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Oracle.DataAccess.Client;
 using System.Configuration;
+using System.Data.SqlClient;
 
 namespace ReaderObject
 {
@@ -21,7 +22,29 @@ namespace ReaderObject
                 connection.ConnectionString = oracledb;
                 connection.Open();
 
+                List<Employe> LesEmployes = new List<Employe>();
+                OracleCommand command = new OracleCommand("SELECT * FROM EMPLOYE",connection);
+                OracleDataReader reader;
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+      
+                    LesEmployes.Add(new Employe(Convert.ToInt16(reader["NUMEMP"]),
+                        reader["NOMEMP"] as String,
+                        reader["PRENOMEMP"] as String,
+                        reader["POSTE"] as String ,
+                        Convert.ToSingle(reader["SALAIRE"]),
+                        reader["Prime"] == DBNull.Value ?  Convert.ToSingle(reader["SALAIRE"]) : 0
+                        ));
+    
+                }
+                foreach (var employe in LesEmployes)
+                {
+                    Console.WriteLine(employe.ToString());
+                }
 
+                reader.Close();
+                connection.Close();
                 Console.ReadKey();
 
 
