@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Oracle.DataAccess.Client;
+using System.Configuration;
 
 namespace ReaderObject
 {
@@ -11,30 +12,26 @@ namespace ReaderObject
     {
         static void Main(string[] args)
         {
-            OracleConnection CnOracle;
-            String Cn = "Data Source=raimonsql;User Id=raimonsql; Password=sio";
-            CnOracle = new OracleConnection();
-            CnOracle.ConnectionString = Cn;
-            CnOracle.Open();
-
-            OracleCommand cmd = new OracleCommand();
-            string cmdEmp = " select * from employe";
-            OracleDataReader reader = cmd.ExecuteReader();
-
-            if (reader.HasRows)
+            try
             {
-                while (reader.Read())
-                {
-                    Console.WriteLine("{0}\t{1}", reader.GetInt32(0),
-                        reader.GetString(1));
-                }
+                String oracledb = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.10.2.10)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=SLAM)));User Id = raimonsql; Password = sio; ";
+
+                String connectionString = oracledb;
+                OracleConnection connection = new OracleConnection();
+                connection.ConnectionString = oracledb;
+                connection.Open();
+
+
+                Console.ReadKey();
+
+
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("No rows found.");
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
             }
-            reader.Close();
-        
+
 
         }
     }
