@@ -16,8 +16,7 @@ namespace ReaderObject
         public Single? Prime { get; set; } // nullable
         public String CodeProjet { get; set; }
         public Int16? Superieur { get; set; } // nullable
-        /*
-        public Employe(short numemp, string nomemp, string prenomemp, string poste, float salaire, float? prime, string codeProjet, short? superieur)
+        public Employe(short numemp, string nomemp, string prenomemp, string poste, float salaire, float? prime, string codeProjet , short superieur)
         {
             Numemp = numemp;
             Nomemp = nomemp;
@@ -27,16 +26,6 @@ namespace ReaderObject
             Prime = prime;
             CodeProjet = codeProjet;
             Superieur = superieur;
-        }
-        */
-        public Employe(short numemp, string nomemp, string prenomemp, string poste, float salaire, float? prime)
-        {
-            Numemp = numemp;
-            Nomemp = nomemp;
-            Prenomemp = prenomemp;
-            Poste = poste;
-            Salaire = salaire;
-            Prime = prime;
         }
 
         public override string ToString()

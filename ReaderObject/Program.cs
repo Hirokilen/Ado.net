@@ -34,7 +34,9 @@ namespace ReaderObject
                         reader["PRENOMEMP"] as String,
                         reader["POSTE"] as String ,
                         Convert.ToSingle(reader["SALAIRE"]),
-                        reader["Prime"] == DBNull.Value ?  Convert.ToSingle(reader["SALAIRE"]) : 0
+                        reader["PRIME"] == DBNull.Value ?   0 : Convert.ToSingle(reader["PRIME"]),
+                        reader["CODEPROJET"] as String,
+                        reader["SUPERIEUR"] == DBNull.Value ? (short)0 : Convert.ToInt16(reader["SUPERIEUR"])
                         ));
     
                 }
